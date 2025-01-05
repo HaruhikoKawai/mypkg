@@ -7,7 +7,7 @@ cd $dir/ros2_ws
 colcon build
 source $dir/.bashrc
 
-ros2 run mypkg battery & NODE=i$!
+ros2 run mypkg battery & pub=i$!
 
 timeout 60 ros2 topic echo /batterycheck > /tmp/mypkg.log 
 

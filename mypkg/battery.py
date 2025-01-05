@@ -8,7 +8,7 @@ def get_battery_percentage():
     battery = psutil.sensors_battery()
     if battery is not None:
         return battery.percent  # 残量
-     return 0
+    return 0
 
 
 def main(args=None):
