@@ -16,11 +16,6 @@ def main(args=None):
     node = Node('battery')
     pub = node.create_publisher(Int16, 'batterycheck', 10)
 
-<<<<<<< main
-def main():
-    node.create_timer(0.5, cb)
-    rclpy.spin(node)
-=======
 
     def tc():
         batterycheck = get_battery_percentage()
@@ -41,4 +36,3 @@ def main():
 
 if __name__ == '__main__':
     main()
->>>>>>> local
