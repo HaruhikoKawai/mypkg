@@ -24,7 +24,7 @@ def main(args=None):
         msg.data = int(batterycheck)
         pub.publish(msg)
         
-    node.create_timer(1.0, tc)
+    node.create_timer(5.0, tc)
 
     try:
         rclpy.spin(node)
