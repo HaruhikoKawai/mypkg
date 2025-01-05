@@ -15,7 +15,7 @@ def main(args=None):
     rclpy.init(args=args)    
     node = Node('battery')
     pub = node.create_publisher(Int16, 'batterycheck', 10)
-
+    rclpy.spin(node)
 
     def tc():
         batterycheck = get_battery_percentage()
@@ -24,12 +24,6 @@ def main(args=None):
         msg.data = int(batterycheck)
         pub.publish(msg)
         
-    node.create_timer(5.0, tc)
+    node.create_timer(10.0, tc)
 
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt:
-        node.get_logger().info('Node stopped by user.')
-    finally:
-        node.destroy_node()
-        rclpy.shutdown()
+    rclpy.spin(node)
