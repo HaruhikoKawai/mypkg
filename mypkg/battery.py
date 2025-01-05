@@ -8,7 +8,7 @@ def get_battery_percentage():
     battery = psutil.sensors_battery()
     if battery is not None:
         return battery.percent  # 残量
-    return None
+     return 0
 
 
 def main(args=None):
@@ -33,6 +33,3 @@ def main(args=None):
     finally:
         node.destroy_node()
         rclpy.shutdown()
-
-if __name__ == '__main__':
-    main()
