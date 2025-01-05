@@ -8,8 +8,8 @@ def generate_launch_description():
 
     talker = launch_ros.actions.Node(
         package='mypkg',
-        executable='talker',
+        executable='battery',
         )
 
-    return launch.LaunchDescription([talker])
+    return launch.LaunchDescription([battery])
 
