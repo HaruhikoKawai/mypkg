@@ -19,6 +19,8 @@ kill $PUB_PID
 
 cat /tmp/mypkg.log | grep 'data: 99'
 
+cat /tmp/mypkg.log
+
 if [ -s /tmp/mypkg.log ]; then
    echo "Log "
 else
