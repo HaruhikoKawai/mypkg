@@ -1,4 +1,6 @@
 #!/bin/bash
+# SPDX-FileCopyrightText: 2024 Haruhiko Kawai
+# SPDX-Licence-Identifier: BSD-3-Clause
 
 dir=~
 [ "$1" != "" ] && dir="$1"
@@ -24,9 +26,9 @@ wait $ECHO_PID
 cat /tmp/mypkg.log
 
 if grep -q 'data: ' /tmp/mypkg.log; then
-    echo "Log contains 'data: '"
+    echo "OK"
 else
-    echo "Log does not contain 'data: '"
+    echo "NO"
 fi
 
 if [ -s /tmp/mypkg.log ]; then

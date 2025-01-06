@@ -1,3 +1,6 @@
+#SPDX-FileCopyrightText: 2024 Haruhiko Kawai 
+#SPDX-Licence-Identifier: BSD-3-Clause
+
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Int16
@@ -11,8 +14,8 @@ def get_battery_percentage():
     return 0
 
 
-def main(args=None):
-    rclpy.init(args=args)    
+def main():
+    rclpy.init()    
     node = Node('battery')
     pub = node.create_publisher(Int16, 'batterycheck', 10)
 
