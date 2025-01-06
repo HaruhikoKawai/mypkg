@@ -10,16 +10,24 @@ source $dir/.bashrc
 ros2 run mypkg battery &
 PUB_PID=$!
 
-sleep 10
+sleep 5
 
-(ros2 topic echo /batterycheck > /tmp/mypkg.log &)&
+ros2 topic echo /batterycheck > /tmp/mypkg.log &
+ECHO_PID=$!
+
 sleep 30
 
 kill $PUB_PID
-
-cat /tmp/mypkg.log | grep 'data: 99'
+kill $ECHO_PID
+wait $ECHO_PID
 
 cat /tmp/mypkg.log
+
+if grep -q 'data: ' /tmp/mypkg.log; then
+    echo "Log contains 'data: '"
+else
+    echo "Log does not contain 'data: '"
+fi
 
 if [ -s /tmp/mypkg.log ]; then
    echo "Log "

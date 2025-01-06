@@ -15,7 +15,6 @@ def main(args=None):
     rclpy.init(args=args)    
     node = Node('battery')
     pub = node.create_publisher(Int16, 'batterycheck', 10)
-    rclpy.spin(node)
 
     def tc():
         batterycheck = get_battery_percentage()
@@ -24,7 +23,7 @@ def main(args=None):
         msg.data = int(batterycheck)
         pub.publish(msg)
         
-    node.create_timer(10.0, tc)
+    node.create_timer(1.0, tc)
 
     rclpy.spin(node)
 
