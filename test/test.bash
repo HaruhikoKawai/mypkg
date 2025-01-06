@@ -17,7 +17,7 @@ sleep 30
 
 kill $PUB_PID
 
-cat /tmp/mypkg.log | grep 'data: '
+cat /tmp/mypkg.log | grep 'data: 99'
 
 if [ -s /tmp/mypkg.log ]; then
    echo "Log "
