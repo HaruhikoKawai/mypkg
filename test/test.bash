@@ -12,7 +12,8 @@ PUB_PID=$!
 
 sleep 10
 
-timeout 30 ros2 topic echo /batterycheck > /tmp/mypkg.log 
+(ros2 topic echo /batterycheck > /tmp/mypkg.log &)&
+sleep 30
 
 kill $PUB_PID
 
