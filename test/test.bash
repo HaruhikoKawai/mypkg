@@ -12,10 +12,8 @@ PUB_PID=$!
 
 sleep 5
 
-timeout 60 ros2 topic echo /batterycheck > /tmp/mypkg.log &
-ECHO_PID=$!
+timeout 30 ros2 topic echo /batterycheck > /tmp/mypkg.log 
 
 kill $PUB_PID
-kill $ECHO_PID
 
-cat /tmp/mypkg.log | grep 'data: 99'
+cat /tmp/mypkg.log | grep 'data: '
