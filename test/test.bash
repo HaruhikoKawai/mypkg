@@ -10,10 +10,18 @@ source $dir/.bashrc
 ros2 run mypkg battery &
 PUB_PID=$!
 
-sleep 5
+sleep 10
 
 timeout 30 ros2 topic echo /batterycheck > /tmp/mypkg.log 
 
 kill $PUB_PID
 
 cat /tmp/mypkg.log | grep 'data: '
+
+if [ -s /tmp/mypkg.log ]; then
+   echo "Log "
+else
+   echo "noLog"
+   exit 1
+
+fi
