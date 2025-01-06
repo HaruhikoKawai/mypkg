@@ -60,4 +60,5 @@ https://ameblo.jp/fiender/entry-12880810651.html#:~:text=psutil.sensors_battery%
 
 <u><h1>ライセンス</h1></u>
 ・このソフトウェアパッケージは、３条項BSDライセンスの基、再配布及び使用が許可されます。
+
 ・©2024 Haruhiko Kawai
