@@ -16,10 +16,6 @@ PUB_PID=$!
 stdbuf -oL ros2 topic echo /batterycheck > /tmp/mypkg.log &
 ECHO_PID=$!
 
-kill $PUB_PID
-kill $ECHO_PID
-wait $ECHO_PID
-
 w=30
 K=0
 while [ ! -s /tmp/mypkg.log ] && [ $K -lt $w ]; do
@@ -42,3 +38,7 @@ else
    exit 1
 
 fi
+
+kill $PUB_PID
+kill $ECHO_PID
+wait $ECHO_PID
