@@ -16,6 +16,10 @@ PUB_PID=$!
 stdbuf -oL ros2 topic echo /batterycheck > /tmp/mypkg.log &
 ECHO_PID=$!
 
+kill $PUB_PID
+kill $ECHO_PID
+wait $ECHO_PID
+
 w=30
 K=0
 while [ ! -s /tmp/mypkg.log ] && [ $K -lt $w ]; do
@@ -25,7 +29,7 @@ done
 
 cat /tmp/mypkg.log
 
-if grep -qE 'data: ([0-9]|[1-9][0-9])' /tmp/mypkg.log; then
+if grep -qE 'data: ([1-9]|[1-9][0-9])' /tmp/mypkg.log; then
     echo "OK"
 else
     echo "NO"
@@ -38,7 +42,3 @@ else
    exit 1
 
 fi
-
-kill $PUB_PID
-kill $ECHO_PID
-wait $ECHO_PID
