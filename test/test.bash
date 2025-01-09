@@ -18,6 +18,7 @@ ECHO_PID=$!
 
 kill $PUB_PID
 kill $ECHO_PID
+wait $ECHO_PID
 
 w=30
 K=0
