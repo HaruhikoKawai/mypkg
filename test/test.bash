@@ -11,13 +11,19 @@ source ~/ros2_ws/install/setup.bash
 source ~/ros2_ws/install/local_setup.bash
 source $dir/.bashrc
 
+
 ros2 run mypkg battery &
 PUB_PID=$!
 
-ros2 topic echo /batterycheck > /tmp/mypkg.log &
+stdbuf -oL ros2 topic echo /batterycheck > /tmp/mypkg.log &
 ECHO_PID=$!
 
-sleep 20
+w=30
+K=0
+while [ ! -s /tmp/mypkg.log ] && [ $K -lt $w ]; do
+    sleep 1
+    K=$((K + 1))
+done
 
 cat /tmp/mypkg.log
 
