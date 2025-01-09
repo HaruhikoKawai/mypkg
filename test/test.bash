@@ -33,6 +33,17 @@ if [ ! -s /tmp/mypkg.log ]; then
     exit 1
 fi
 
+# プロセスの終了処理
+if ps -p $PUB_PID > /dev/null; then
+    kill $PUB_PID
+    wait $PUB_PID
+fi
+
+if ps -p $ECHO_PID > /dev/null; then
+    kill $ECHO_PID
+    wait $ECHO_PID
+fi
+
 cat /tmp/mypkg.log
 
 if grep -qE 'data: ([0-9]|[0-9][1-9])' /tmp/mypkg.log; then
@@ -48,7 +59,3 @@ else
    exit 1
 
 fi
-
-    kill $PUB_PID
-    kill $ECHO_PID
-    wait $ECHO_PID
