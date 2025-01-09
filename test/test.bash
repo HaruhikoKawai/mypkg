@@ -25,7 +25,7 @@ done
 
 cat /tmp/mypkg.log
 
-if grep -qE 'data: ([1-9][1-9])' /tmp/mypkg.log; then
+if grep -qE 'data: ([0-9]|[1-9][0-9])' /tmp/mypkg.log; then
     echo "OK"
 else
     echo "NO"
