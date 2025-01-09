@@ -7,8 +7,6 @@ dir=~
 
 cd $dir/ros2_ws
 colcon build
-source ~/ros2_ws/install/setup.bash
-source ~/ros2_ws/install/local_setup.bash
 source $dir/.bashrc
 
 
