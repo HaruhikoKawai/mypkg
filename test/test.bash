@@ -6,7 +6,9 @@ dir=~
 [ "$1" != "" ] && dir="$1"
 
 cd $dir/ros2_ws
+
 colcon build
+
 source $dir/.bashrc
 
 
@@ -20,14 +22,20 @@ ECHO_PID=$!
 
 w=30
 K=0
+
 while [ ! -s /tmp/mypkg.log ] && [ $K -lt $w ]; do
     sleep 1
     K=$((K + 1))
 done
 
+if [ ! -s /tmp/mypkg.log ]; then
+    echo "Log file is empty. Exiting."
+    exit 1
+fi
+
 cat /tmp/mypkg.log
 
-if grep -qE 'data: (0|[0-9][1-9])' /tmp/mypkg.log; then
+if grep -qE 'data: ([0-9]|[0-9][1-9])' /tmp/mypkg.log; then
     echo "OK"
 else
     echo "NO"
@@ -41,12 +49,6 @@ else
 
 fi
 
-if ps -p $PUB_PID > /dev/null; then
     kill $PUB_PID
-    wait $PUB_PID
-fi
-
-if ps -p $ECHO_PID > /dev/null; then
     kill $ECHO_PID
     wait $ECHO_PID
-fi
