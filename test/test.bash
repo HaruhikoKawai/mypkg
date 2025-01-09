@@ -13,6 +13,8 @@ source $dir/.bashrc
 ros2 run mypkg battery &
 PUB_PID=$!
 
+sleep 5
+
 stdbuf -oL ros2 topic echo /batterycheck > /tmp/mypkg.log &
 ECHO_PID=$!
 
@@ -25,7 +27,7 @@ done
 
 cat /tmp/mypkg.log
 
-if grep -qE 'data: ([0-9]|[1-9][0-9])' /tmp/mypkg.log; then
+if grep -qE 'data: ([0-9]|[0-9][1-9])' /tmp/mypkg.log; then
     echo "OK"
 else
     echo "NO"
@@ -39,7 +41,12 @@ else
 
 fi
 
-kill $PUB_PID
-kill $ECHO_PID
-wait $ECHO_PID
+if ps -p $PUB_PID > /dev/null; then
+    kill $PUB_PID
+    wait $PUB_PID
+fi
 
+if ps -p $ECHO_PID > /dev/null; then
+    kill $ECHO_PID
+    wait $ECHO_PID
+fi
